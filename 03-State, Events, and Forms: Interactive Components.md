@@ -1,39 +1,28 @@
-# Handling Events the React Way
+## Handling Events the React Way
 
-Sure, here are detailed notes with code from the paragraph given below:
+### Declarative Approach
 
-**Handling Events in React**
+Instead of using the imperative addEventListener method, React takes a declarative approach to event handling. Event handlers are specified directly on elements using props like onClick or onMouseEnter. Event handlers are functions, not function calls.
 
-**Declarative Approach**
-
-* Instead of using the imperative addEventListener method, React takes a declarative approach to event handling.
-* Event handlers are specified directly on the elements using props, such as `onClick` or `onMouseEnter`.
-* Event handlers are functions, not function calls. This means you pass the function reference, not the function's return value.
-
-**Example: Button Click Event**
+### Button Click Event Example
 
 ```jsx
 <button onClick={() => alert("Previous")}>Previous</button>
 ```
 
-* The `onClick` prop specifies the event handler function.
-* The arrow function passed to `onClick` is the event handler. It will be executed when the button is clicked.
+The onClick prop specifies the event handler function. The arrow function executes when the button is clicked.
 
-**Example: Hover Event**
+### Hover Event Example
 
 ```jsx
 <button onMouseEnter={() => alert("TEST")}>Hover</button>
 ```
 
-* The `onMouseEnter` prop specifies the event handler for mouse hover events.
-* The arrow function passed to `onMouseEnter` is the event handler. It will be executed when the mouse enters the button.
+The onMouseEnter prop specifies the event handler for mouse hover events.
 
-**Defining Event Handler Functions Separately**
+### Defining Event Handler Functions Separately
 
-* It is common practice to define event handler functions separately from the JSX markup.
-* This keeps the code more organized and easier to read.
-
-**Example: Defining Event Handler Function**
+It is common practice to define event handler functions separately from JSX markup to keep code organized.
 
 ```jsx
 function handlePrevious() {
@@ -43,93 +32,76 @@ function handlePrevious() {
 <button onClick={handlePrevious}>Previous</button>
 ```
 
-* The `handlePrevious` function is defined separately.
-* The `onClick` prop references the `handlePrevious` function.
+### Key Points
 
-**Using State**
+| Concept | Description |
+|---------|-------------|
+| Declarative | Event handlers specified directly on elements |
+| Function Reference | Pass the function, not the function call |
+| Organization | Define handlers separately from JSX |
+| State | Needed to change values based on events |
 
-* To change the step value based on button clicks, you need to use state.
-* State is a way to store data that can change over time.
-* We will learn more about state in the next section.
+---
 
-**Conclusion**
+## What is State in React?
 
-* React's declarative approach to event handling makes it easy to manage user interactions.
-* By defining event handler functions separately, you can keep your code clean and organized.
-* State allows you to store and update data that can be used to control the behavior of your components.
+### What is State?
 
-# What is State in React?
+State is data that a component can hold over time. It stores information that a component needs to remember throughout its lifecycle. State is the "memory" of a component.
 
-Sure, here are detailed notes with code from the paragraph given below:
+### Examples of State
 
-**Understanding State in React**
+| Example | Description |
+|---------|-------------|
+| Notification count | Number of unread notifications |
+| Input field text | Content typed by user |
+| Active tab | Currently selected tab |
+| Shopping cart | Items added by user |
 
-**What is State?**
+### Key Characteristics of State
 
-* State is data that a component can hold over time.
-* It is used to store information that a component needs to remember throughout its lifecycle.
-* It can be thought of as the "memory" of a component.
+| Characteristic | Description |
+|----------------|-------------|
+| User-changeable | Can be modified by user interaction |
+| Persistent | Lasts throughout component lifecycle |
+| Component-specific | Belongs to a single component |
 
-**Examples of State**
+### Updating State Triggers Re-rendering
 
-* Notification count
-* Text content of an input field
-* Active tab in a tab component
-* Content of a shopping cart
+Whenever state is updated, React re-renders the component, creating a new updated view on the screen.
 
-**Key Characteristics of State**
+### State as a Synchronization Tool
 
-* State is user-changeable.
-* State is persistent over the lifecycle of the component.
-* State is specific to a single component.
+State is how React synchronizes the user interface with data. Changing the state changes the UI.
 
-**Updating State Triggers Re-rendering**
+### Benefits of State
 
-* Whenever a piece of state is updated, React re-renders the component.
-* Re-rendering creates a new updated view for the component.
-* The view is the component's visual representation on the screen.
+| Benefit | Description |
+|---------|-------------|
+| Updates view | Re-renders component automatically |
+| Persists data | Maintains local variables between renders |
 
-**State as a Synchronization Tool**
+---
 
-* State is how React synchronizes the user interface with data.
-* Changing the state changes the UI.
+## Creating a State Variable With useState
 
-**Benefits of State**
+### Creating the State Variable
 
-* Allows developers to update the component's view by re-rendering the component.
-* Allows developers to persist local variables between multiple renders and re-renders.
+Use the useState hook to define a state variable.
 
-**Importance of Understanding State**
-
-* Understanding the mechanics of state is crucial for effective React development.
-* State is the most powerful tool in the world of React.
-
-**Next Steps**
-
-* Explore how to use state in practice using hooks, Context API, or external tools.
-* Learn how to think about state in React.
-
-# Creating a State Variable With useState
-Sure, here are detailed notes with code from the paragraph given below:
-
-**Implementing State in the React App**
-
-**Creating the State Variable**
-
-1. Use the `useState` hook to define a state variable.
 ```javascript
 const [step, setStep] = useState(1);
 ```
 
-2. Destructure the returned array to access the state variable and setter function.
+Destructure the returned array to access the state variable and setter function.
+
 ```javascript
 const currentStep = step;
 const setStepFunction = setStep;
 ```
 
-**Using State in the Component**
+### Using State in the Component
 
-1. Use the state variable in JSX and other parts of the component's code.
 ```javascript
 <span>{currentStep}</span>
 
@@ -137,9 +109,8 @@ const setStepFunction = setStep;
 <button onClick={() => setStepFunction(currentStep - 1)}>Previous</button>
 ```
 
-**Updating State in Event Handlers**
+### Updating State in Event Handlers
 
-1. Use the setter function to update the state variable in event handlers.
 ```javascript
 function handleNext() {
   setStepFunction(step + 1);
@@ -150,9 +121,10 @@ function handlePrevious() {
 }
 ```
 
-**Preventing Invalid State Updates**
+### Preventing Invalid State Updates
 
-1. Add conditions in event handlers to prevent invalid state updates.
+Add conditions to prevent invalid state updates.
+
 ```javascript
 function handleNext() {
   if (step < 3) {
@@ -167,69 +139,48 @@ function handlePrevious() {
 }
 ```
 
-**Hook Rules**
+### Hook Rules
 
-1. Hooks must be called at the top level of a function component.
+| Rule | Description |
+|------|-------------|
+| Top level | Hooks must be called at top level of component |
+| No conditions | Cannot be inside if statements or loops |
+| No nested functions | Cannot be inside nested functions |
+| Use setter | Only update state using the setter function |
 
-2. Hooks must not be called inside conditional statements, loops, or nested functions.
+### Advantages of React State Management
 
-3. Hooks should only be updated using the setter function provided by the `useState` hook.
+| Advantage | Description |
+|-----------|-------------|
+| No DOM manipulation | Avoids imperative DOM updates |
+| Reusability | Enhances component reusability |
+| Predictability | Enables maintainable state updates |
 
-**Avoiding Template Literals When Unnecessary**
+---
 
-1. Simplify expressions that don't involve string concatenation.
-```javascript
-<span>{step}</span>
-```
+## Don't Set State Manually
 
-**Advantages of React State Management**
+### React's Immutable State Approach
 
-1. Avoids imperative DOM manipulations.
-2. Enhances component reusability.
-3. Enables predictable and maintainable state updates.
+React enforces immutability for state management. Direct mutation of state variables is not allowed. State updates must be performed using setter functions.
 
-# Don't Set State Manually!
+### Breaking React by Mutating State
 
-Sure, here are detailed notes with code from the paragraph given below:
+Attempting to mutate state directly will not cause an error but will prevent updates from being reflected in the UI. React relies on the setter function to recognize state changes and trigger re-renders.
 
-**The Importance of Using State Setter Functions**
+### Proper State Update Mechanism
 
-**React's Immutable State Approach**
+Use the setter function to update state values. Pass the new state value to the setter function.
 
-* React enforces immutability for state management.
-* Direct mutation of state variables is not allowed.
-* State updates must be performed using setter functions.
+### Code Examples
 
-**Breaking React by Mutating State**
-
-* Attempting to mutate state directly will not cause an error but will prevent updates from being reflected in the UI.
-* React relies on the setter function to recognize state changes and trigger re-renders.
-
-**Avoiding Object Mutation**
-
-* Mutating objects within state is also discouraged.
-* While it may sometimes work, it is considered a bad practice and can lead to unexpected behavior.
-
-**Proper State Update Mechanism**
-
-* Use the setter function to update state values.
-* Pass in the new state object to the setter function.
-
-**Immutability as a Core Principle**
-
-* Treat state as immutable in React.
-* Avoid direct state mutation and always use the provided setter functions.
-* This ensures consistent state management and prevents unexpected behavior.
-
-**Code Examples:**
-
-**Direct Mutation (Incorrect Approach)**
+**Direct Mutation (Incorrect)**
 
 ```javascript
 const [step, setStep] = useState(1);
 
 handleNext() {
-  step++; // Direct mutation of state variable
+  step++; // Direct mutation - WRONG
 }
 ```
 
@@ -237,17 +188,17 @@ handleNext() {
 
 ```javascript
 handleNext() {
-  setStep(step + 1); // Update state using setter function
+  setStep(step + 1); // Correct
 }
 ```
 
-**Object Mutation (Incorrect Approach)**
+**Object Mutation (Incorrect)**
 
 ```javascript
 const [test, setTest] = useState({ name: 'Jonas' });
 
 handleNext() {
-  test.name = 'Fred'; // Direct mutation of object property within state
+  test.name = 'Fred'; // Direct mutation - WRONG
 }
 ```
 
@@ -255,246 +206,177 @@ handleNext() {
 
 ```javascript
 handleNext() {
-  setTest({ name: 'Fred' }); // Update state by passing new object
+  setTest({ name: 'Fred' }); // Correct
 }
 ```
 
-# The Mechanics of State
+### Core Principle
 
-Sure, here are detailed notes with code from the paragraph given below:
+Treat state as immutable in React. Avoid direct state mutation and always use the provided setter functions.
 
-**Understanding the Mechanics of State in React**
+---
 
-**React's Declarative Approach**
+## The Mechanics of State
 
-* React updates the UI by re-rendering components instead of directly manipulating the DOM.
-* This declarative approach separates the UI representation from the underlying data.
+### React's Declarative Approach
 
-**Re-rendering as the Mechanism for UI Updates**
+React updates the UI by re-rendering components instead of directly manipulating the DOM. This separates UI representation from underlying data.
 
-* React re-renders a component whenever its underlying data changes, including state updates.
-* Re-rendering involves creating a new view for the component, effectively replacing the old view.
+### Re-rendering as the Mechanism for UI Updates
 
-**Preserving Component State During Re-rendering**
+React re-renders a component whenever its underlying data changes, including state updates. Re-rendering creates a new view for the component, replacing the old view.
 
-* React maintains the component's state across re-renders.
-* State persists even when the component is re-rendered multiple times.
+### Preserving Component State During Re-rendering
 
-**State Updates Trigger Re-rendering**
+React maintains the component's state across re-renders. State persists even when the component is re-rendered multiple times.
 
-* Updating a component's state causes React to automatically re-render the component.
-* This ensures that the UI reflects the changes in the underlying data.
+### Key Points
 
-**State Updates in the Advice App**
+| Concept | Description |
+|---------|-------------|
+| Re-rendering | Creates new view when data changes |
+| State persistence | State maintained across re-renders |
+| Automatic updates | State changes trigger re-rendering automatically |
+| Synchronization | React keeps UI in sync with data |
 
-* In the advice app, fetching new advice updates the advice state.
-* React re-renders the component to display the updated advice.
+---
 
-**React's Approach to UI Synchronization**
+## Adding Another Piece of State
 
-* React synchronizes the UI with data by re-rendering components based on state changes.
-* This mechanism is a core principle of React's declarative programming model.
+### Implementing Open and Close Functionality
 
-**The Relationship between React's Name and Functionality**
-
-* React's name reflects its ability to react to state changes and update the UI accordingly.
-* React's declarative approach allows it to effectively keep the UI in sync with data.
-
-**Key Points:**
-
-* React's declarative approach separates UI representation from data.
-* React re-renders components to update the UI.
-* React preserves component state during re-rendering.
-* Updating state triggers re-rendering.
-* React's name reflects its ability to react to state changes and synchronize the UI.
-
-# Adding Another Piece of State
-Sure, here are detailed notes with code from the paragraph given below:
-
-**Implementing Open and Close Functionality with State**
-
-1. **Creating the State Variable:**
-   - Define a new state variable named `isOpen` using the `useState` hook.
-   - Initialize the `isOpen` state to `true` by passing `true` as the default value.
-
-2. **Conditional Rendering:**
-   - Use conditional rendering to display or hide the component based on the `isOpen` state.
-   - Wrap the content to be conditionally rendered in curly braces (`{}`) to enter JavaScript mode.
-   - Use the conditional operator (`?`) to check the value of `isOpen`.
-   - Return the desired JSX based on the state value.
-
-3. **Updating State:**
-   - Create an event handler for the "Close" button to update the `isOpen` state.
-   - Use the `setState` function to update the `isOpen` state to the opposite of its current value.
-
-4. **Preserving State During Re-rendering:**
-   - State is maintained across re-renders.
-   - Changing the state of one component does not affect the state of other components.
-
-5. **React Fragments:**
-   - Use a React fragment to group multiple JSX elements without adding an extra DOM node.
-   - Enclose the button and the step div within a fragment to return them together without adding an extra div.
-
-**Code Snippets:**
+**Creating the State Variable**
 
 ```javascript
 const [isOpen, setIsOpen] = useState(true);
+```
 
+Initialize isOpen to true as the default value.
+
+**Conditional Rendering**
+
+Use conditional rendering to display or hide content based on state.
+
+```javascript
 return (
-  <Fragment>
+  <div>
     {isOpen && (
       <div className="steps-container">
         {/* Step content */}
       </div>
     )}
     <button className="close" onClick={() => setIsOpen(!isOpen)}>
-      <span>✕</span>
+      <span>Close</span>
     </button>
-  </Fragment>
+  </div>
 );
 ```
 
-**Key Points:**
+### Updating State
 
-* State allows components to store and manage data over time.
-* Conditional rendering enables dynamic UI changes based on state.
-* React maintains state across re-renders for consistent data representation.
-* React fragments provide a way to group JSX elements without adding an extra DOM node.
-
-# Updating State Based on Current State
-
-Sure, here are detailed notes with code from the paragraph given below:
-
-**Updating State Based on Current State**
-
-**The Problem with Directly Updating State**
-
-* Modifying state directly based on its current value can lead to unintended behavior, especially when multiple updates occur in quick succession.
-* This issue arises because direct updates bypass the re-rendering process that React uses to synchronize the UI with the state.
-
-**Using Callback Functions to Update State**
-
-* To address this issue, React provides a more reliable approach using callback functions.
-* Callback functions receive the current state value as an argument, allowing for updates based on the most up-to-date state information.
-* This ensures that state changes are consistent and predictable, even when multiple updates occur consecutively.
-
-**Implementing Callback Functions for State Updates**
-
-1. Replace the direct state update with a callback function.
-2. Pass the callback function instead of a new state value.
-3. Inside the callback function, receive the current state value as an argument.
-4. Calculate the new state value based on the current state value.
-5. Return the updated state value from the callback function.
-
-**Benefits of Using Callback Functions**
-
-* Ensures consistent and predictable state updates, even with multiple consecutive updates.
-* Improves code readability and maintainability.
-* Facilitates collaboration with other developers by adhering to React best practices.
-
-**Code Snippets:**
+Create an event handler to update isOpen to the opposite of its current value.
 
 ```javascript
-// Direct state update (NOT RECOMMENDED)
-setState(step - 1);
+<button onClick={() => setIsOpen(!isOpen)}>Close</button>
+```
 
-// State update using callback function (RECOMMENDED)
+### Key Points
+
+| Concept | Description |
+|---------|-------------|
+| State isolation | Changing one component's state doesn't affect others |
+| State persistence | State maintained across re-renders |
+| Conditional rendering | Display content based on state value |
+
+---
+
+## Updating State Based on Current State
+
+### The Problem with Directly Updating State
+
+Modifying state directly based on its current value can lead to unintended behavior, especially when multiple updates occur in quick succession.
+
+### Using Callback Functions to Update State
+
+React provides a more reliable approach using callback functions. Callback functions receive the current state value as an argument, allowing for updates based on the most up-to-date state information.
+
+### Implementation
+
+1. Replace direct state update with a callback function
+2. Pass the callback function instead of a new state value
+3. Receive current state as an argument
+4. Calculate new state based on current state
+5. Return updated state value
+
+### Code Snippets
+
+**Direct state update (NOT RECOMMENDED)**
+
+```javascript
+setState(step - 1);
+```
+
+**State update using callback function (RECOMMENDED)**
+
+```javascript
 setState((prevState) => prevState - 1);
 ```
 
-**Key Points:**
+### Benefits of Callback Functions
 
-* Direct state updates based on current state can lead to unintended behavior.
-* Use callback functions to update state reliably and consistently.
-* Callback functions receive the current state value as an argument.
-* Calculate the new state value within the callback function.
-* Return the updated state value from the callback function.
+| Benefit | Description |
+|---------|-------------|
+| Consistency | Ensures predictable updates |
+| Reliability | Works correctly with multiple consecutive updates |
+| Best practice | Adheres to React guidelines |
 
-# More Thoughts About State + State Guidelines
+---
 
-Sure, here are detailed notes with code from the paragraph given below:
+## More Thoughts About State + State Guidelines
 
-**Key Concepts and Guidelines for State Management**
+### Key Concepts
 
-**State Isolation:**
+**State Isolation**
 
-* Each component maintains its own independent state.
-* State changes in one component do not affect the state of other components.
-* This ensures modularity and prevents unintended state interactions.
+Each component maintains its own independent state. State changes in one component do not affect other components.
 
-**State as a Reflection of Data:**
+**State as a Reflection of Data**
 
-* The entire UI can be viewed as a function of state.
-* The UI reflects the current state of all components in the application.
-* State changes drive UI updates, maintaining a consistent representation of data.
+The entire UI can be viewed as a function of state. The UI reflects the current state of all components.
 
-**Declarative Approach to UI Building:**
+**Declarative Approach to UI Building**
 
-* State provides a declarative way to describe the UI.
-* React handles the underlying DOM manipulations based on state changes.
-* This separates UI logic from DOM manipulations, making code more concise and maintainable.
+State provides a declarative way to describe the UI. React handles DOM manipulations based on state changes.
 
-**Practical Guidelines for State Management:**
+### Practical Guidelines for State Management
 
-1. **Create State for Dynamic Data:**
-   Introduce state variables for data that needs to change over time.
-   Identify variables that need to be dynamic and use state to manage them.
+| Guideline | Description |
+|-----------|-------------|
+| Create state for dynamic data | Use state for data that changes over time |
+| Update state for dynamic behavior | Update state when behavior or appearance needs to change |
+| Visualize state-driven UI | Imagine UI as reflection of state |
+| Avoid unnecessary state | Use regular variables for data that doesn't need re-renders |
+| Master state management | Essential for advanced React development |
 
-2. **Update State for Dynamic Behavior:**
-   Update state whenever a component's behavior or appearance needs to change dynamically.
-   Use event handlers to trigger state updates and reflect changes in the UI.
+---
 
-3. **Visualize State-Driven UI:**
-   Imagine the component's UI as a reflection of its state.
-   Visualize how state changes affect the UI and update state accordingly.
+## Building a Form and Handling Submissions
 
-4. **Avoid Unnecessary State Usage:**
-   Use state only for data that triggers re-renders.
-   Use regular variables for data that doesn't require re-renders to improve performance.
+### Form Structure and Elements
 
-5. **Mastering State is Key:**
-   State management is a crucial aspect of React development.
-   Understanding state concepts and guidelines will unlock advanced React development skills.
+Use standard HTML form elements to build forms in React. Create a form element with input fields and a submit button.
 
-# Building a Form and Handling Submissions
+### Event Handling for Form Submission
 
-Sure, here are detailed notes with code from the paragraph given below:
+Create an event handler function named handleSubmit. Attach it to the form's onSubmit prop. Prevent default form submission using event.preventDefault.
 
-**Creating and Handling Forms in React**
-
-**Form Structure and Elements**
-
-* Use standard HTML form elements to build forms in React.
-* Create a form element with the necessary input fields and a submit button.
-* Dynamically generate form options using JavaScript's array.from method.
-* Assign unique keys to each form element for proper rendering.
-
-**Event Handling for Form Submission**
-
-* Create an event handler function named handleSubmit.
-* Attach the handleSubmit function to the form's onSubmit event using the onSubmit prop.
-* Prevent default form submission behavior using event.preventDefault to prevent page reloading.
-* Access the event object passed to the handleSubmit function to retrieve form data.
-
-**Controlled Elements for Form Data Management**
-
-* Instead of accessing form data directly from the event object, use controlled elements.
-* Controlled elements are React components that manage their own state and update the DOM accordingly.
-* We'll cover controlled elements in detail in a subsequent video.
-
-**Key Takeaways**
-
-* React uses standard HTML form elements for form creation.
-* Event handlers are used to handle form submissions.
-* Controlled elements provide a more structured approach to managing form data.
-
-**Code Snippets:**
+### Code Example
 
 ```javascript
 // Submit event handler
 function handleSubmit(event) {
   event.preventDefault();
-  console.log(event.target); // Access form data from the event object
+  console.log(event.target); // Access form data from event object
 }
 
 // Form with event handler
@@ -509,27 +391,32 @@ function handleSubmit(event) {
 </form>
 ```
 
-# Controlled Elements
+### Key Takeaways
 
-Sure, here are detailed notes with code from the paragraph given below:
+| Concept | Description |
+|---------|-------------|
+| Standard HTML forms | Use regular form elements |
+| Event handlers | Handle form submissions with onSubmit |
+| Prevent default | Use event.preventDefault() to avoid page reload |
+| Controlled elements | Better approach for form data management |
 
-**Controlled Elements in React**
+---
 
-**Concept and Purpose**
+## Controlled Elements
 
-* Controlled elements are a technique for managing form input data in React.
-* Instead of relying on the DOM to store input values, controlled elements store values in the React component's state.
-* This approach provides better control over form data and enables validation and error handling.
+### Concept and Purpose
 
-**Implementation Steps**
+Controlled elements manage form input data in React. Instead of relying on the DOM to store input values, controlled elements store values in the component's state. This provides better control over form data and enables validation.
 
-1. **Create State Variables:** Define state variables for each input field, such as `description` and `quantity`.
+### Implementation Steps
 
-2. **Bind State Variables to Input Values:** Use the `value` prop on input elements to bind them to the corresponding state variables.
+| Step | Description |
+|------|-------------|
+| 1 | Create state variables for each input field |
+| 2 | Bind state variables to input values using value prop |
+| 3 | Attach onChange handlers to update state |
 
-3. **Handle Change Events:** Attach `onChange` event handlers to input elements to update the corresponding state variables when the value changes.
-
-**Example Code**
+### Example Code
 
 ```javascript
 // State variables for form data
@@ -537,45 +424,45 @@ const [description, setDescription] = useState('');
 const [quantity, setQuantity] = useState(5);
 
 // Controlled input elements
-<input type="text" value={description} onChange={(event) => setDescription(event.target.value)} />
-<select value={quantity} onChange={(event) => setQuantity(Number(event.target.value))}>
+<input 
+  type="text" 
+  value={description} 
+  onChange={(event) => setDescription(event.target.value)} 
+/>
+
+<select 
+  value={quantity} 
+  onChange={(event) => setQuantity(Number(event.target.value))}
+>
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
 </select>
 ```
 
-**Benefits of Controlled Elements**
+### Benefits of Controlled Elements
 
-* Centralized state management: Form data is stored in a single location, making it easier to access and update.
-* Improved validation and error handling: React can easily validate input values and display error messages.
-* Preventative data loss: State updates are automatically reflected in the UI, ensuring data consistency.
+| Benefit | Description |
+|---------|-------------|
+| Centralized state | Form data stored in one location |
+| Validation | Easy to validate input values |
+| Error handling | Display error messages easily |
+| Data consistency | State updates automatically reflected in UI |
 
-**Key Takeaways**
+---
 
-* Controlled elements provide a structured approach to managing form data in React.
-* The technique involves creating state variables, binding them to input values, and handling change events.
-* Controlled elements offer better control over form data, enabling validation and error handling.
+## State vs. Props
 
-# State vs. Props
+### Key Differences
 
-Sure, here are detailed notes with code from the paragraph given below:
+| Aspect | State | Props |
+|--------|-------|-------|
+| Ownership | Internal data owned by component | External data owned by parent component |
+| Mutability | Mutable, can be updated by component | Read-only, cannot be modified by receiving component |
+| Purpose | Makes components interactive | Configures child components |
+| Re-rendering | Causes re-render when updated | Causes re-render when updated if passed as prop |
 
-**Key Differences between State and Props in React**
-
-* **State:**
-    * Internal data owned by the component in which it is declared.
-    * Mutable data that can be updated by the component itself.
-    * Used to make components interactive.
-    * Causes re-rendering of the component when updated.
-
-* **Props:**
-    * External data owned by the parent component.
-    * Read-only data that cannot be modified by the component receiving it.
-    * Used to configure child components.
-    * Causes re-rendering of the component when updated if it's passed as a prop.
-
-**Example Code**
+### Example Code
 
 ```javascript
 // Parent component
@@ -595,14 +482,14 @@ function Question(props) {
 }
 ```
 
-**When State and Props Interact**
+### When State and Props Interact
 
-If a piece of state is passed as a prop to a child component, and the state is updated, both the component owning the state and the component receiving the state as a prop will be re-rendered. This ensures that the child component remains in sync with the updated state.
+If a piece of state is passed as a prop to a child component and the state is updated, both the component owning the state and the component receiving the state as a prop will be re-rendered. This ensures the child component stays in sync with the updated state.
 
-**Conclusion**
+### Conclusion
 
-State and props are both fundamental concepts in React, each serving a distinct purpose. State is used to manage internal data and make components interactive, while props are used to pass data from parent components to child components and configure their behavior. Understanding the difference between state and props is crucial for building effective and maintainable React applications.
-
-# 
-
+| Concept | Purpose |
+|---------|---------|
+| State | Manage internal data, make components interactive |
+| Props | Pass data from parent to child, configure behavior |
 
