@@ -1,7 +1,3 @@
-Here's the **easy-to-scan, beginner-friendly** version with no icons. Copy-paste ready:
-
----
-
 ## React + ReactDOM: How They Work Together
 
 ### The Pizza Shop Example
