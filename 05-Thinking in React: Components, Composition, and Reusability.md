@@ -1,62 +1,61 @@
-# How to Split a UI Into Components
-**Notes on "Splitting a huge component into many smaller components in React"**
+## How to Split a UI Into Components
 
-**What is a component?**
+### What is a Component?
 
 A component is a reusable piece of code that renders HTML, CSS, and JavaScript. Components are the building blocks of React applications.
 
-**Why should we split a huge component into many smaller components?**
+### Why Split a Huge Component?
 
-There are several reasons why we should split a huge component into many smaller components:
+| Reason | Description |
+|--------|-------------|
+| Reusability | Smaller components can be used in multiple places |
+| Maintainability | Easier to understand and debug |
+| Performance | React renders smaller components faster |
 
-* **Reusability:** Smaller components are more reusable than huge components. This means that we can use the same component in multiple places in our application without having to rewrite the code.
-* **Maintainability:** Smaller components are easier to maintain than huge components. This is because it is easier to understand and debug smaller components.
-* **Performance:** Smaller components can improve the performance of our application. This is because React can render smaller components more quickly than huge components.
+### How to Split a Component
 
-**How to split a huge component into many smaller components**
+| Step | Action |
+|------|--------|
+| 1 | Identify different pieces of functionality |
+| 2 | Create a new component for each piece |
+| 3 | Extract code from huge component to new component |
+| 4 | Update huge component to use new components |
 
-To split a huge component into many smaller components, we can follow these steps:
+### Guidelines for Splitting Components
 
-1. Identify the different pieces of functionality that the huge component is responsible for.
-2. Create a new component for each piece of functionality.
-3. Extract the code for each piece of functionality from the huge component and place it in the new component.
-4. Update the huge component to use the new components.
+| Guideline | Description |
+|-----------|-------------|
+| Logical separation | Each component has one responsibility |
+| Reusability | Make components that can be reused |
+| Keep small | Components should be easy to understand |
+| Descriptive names | Name should describe what component does |
+| No nested declarations | Avoid declaring components inside other components |
 
-**Guidelines for splitting components**
-
-Here are some guidelines for splitting components:
-
-* **Create a logical separation of content.** Each component should have a single, well-defined responsibility.
-* **Make components reusable.** If a component can be reused, then it should be.
-* **Keep components small and simple.** Components should be easy to understand and maintain.
-* **Use descriptive component names.** Component names should be descriptive of what the component does.
-* **Avoid declaring components inside other components.** This can make the code difficult to understand and maintain.
-
-**Conclusion**
-
-Splitting a huge component into many smaller components can make our React applications more reusable, maintainable, and performant. By following the guidelines above, we can split our components in a way that is both effective and efficient.
-
-**Code example**
-
-Here is a code example of how to split a huge component into many smaller components:
+### Code Example
 
 ```javascript
-// Huge component
+// Huge component (BEFORE)
 const HugeComponent = () => {
-  // ...
+  return (
+    <div>
+      <header>Header Content</header>
+      <main>Main Content</main>
+      <footer>Footer Content</footer>
+    </div>
+  );
 };
 
-// Smaller components
+// Smaller components (AFTER)
 const HeaderComponent = () => {
-  // ...
+  return <header>Header Content</header>;
 };
 
 const ContentComponent = () => {
-  // ...
+  return <main>Main Content</main>;
 };
 
 const FooterComponent = () => {
-  // ...
+  return <footer>Footer Content</footer>;
 };
 
 // Split huge component into smaller components
@@ -71,16 +70,13 @@ const NewHugeComponent = () => {
 };
 ```
 
-In this example, we have split the `HugeComponent` into three smaller components: `HeaderComponent`, `ContentComponent`, and `FooterComponent`. Each of these smaller components has a single, well-defined responsibility. We have also updated the `NewHugeComponent` to use the new components.
+---
 
-# Component Categories
-**Notes on "Different component categories in React"**
+## Component Categories
 
-**Stateless or presentational components**
+### Stateless (Presentational) Components
 
-Stateless components are components that do not have any state. This means that their output is always the same for the same input props. Stateless components are typically used to render UI elements, such as buttons, headers, and images.
-
-Here is an example of a stateless component:
+Components that do not have any state. Their output is always the same for the same input props.
 
 ```javascript
 const ButtonComponent = ({ text, onClick }) => {
@@ -92,13 +88,9 @@ const ButtonComponent = ({ text, onClick }) => {
 };
 ```
 
-This component simply renders a button with the specified text and onClick prop. It does not have any state, so its output is always the same for the same input props.
+### Stateful Components
 
-**Stateful components**
-
-Stateful components are components that have state. This means that their output can change depending on their state. Stateful components are typically used to manage user input, data fetching, and other dynamic behavior.
-
-Here is an example of a stateful component:
+Components that have state. Their output can change depending on their state.
 
 ```javascript
 class CounterComponent extends React.Component {
@@ -123,13 +115,9 @@ class CounterComponent extends React.Component {
 }
 ```
 
-This component has a state variable called `count`. It also has an `incrementCount()` method that increments the `count` state variable. When the `incrementCount()` method is called, the component's output will change because its state has changed.
+### Structural Components
 
-**Structural components**
-
-Structural components are components that provide structure to the application, such as pages, layouts, and screens. Structural components are typically composed of smaller components.
-
-Here is an example of a structural component:
+Components that provide structure to the application, such as pages, layouts, and screens.
 
 ```javascript
 const AppLayout = () => {
@@ -143,44 +131,37 @@ const AppLayout = () => {
 };
 ```
 
-This component simply composes three smaller components: `Header`, `Content`, and `Footer`. The `AppLayout` component is responsible for providing the structure of the application, but it does not contain any specific UI elements.
+### Category Summary
 
-**Conclusion**
+| Category | Has State? | Purpose | Example |
+|----------|------------|---------|---------|
+| Stateless | No | Render UI elements | Button, Image |
+| Stateful | Yes | Manage user input, data fetching | Counter, Form |
+| Structural | Maybe | Provide app structure | Layout, Page |
 
-Stateless, stateful, and structural components are three categories of components that naturally emerge in most React code bases. Each category of component has its own specific purpose and benefits.
+---
 
-Stateless components are typically used to render UI elements. They are simple and efficient, but they cannot manage state.
+## Prop Drilling
 
-Stateful components are typically used to manage user input, data fetching, and other dynamic behavior. They are more complex than stateless components, but they are more powerful and flexible.
+### Problem: Hardcoded Values
 
-Structural components are typically used to provide structure to the application. They are composed of smaller components and they are responsible for the overall layout of the application.
-
-# Prop Drilling
-Here are some detailed notes from the paragraph given below, with code examples:
-
-## Problem: Not dynamically calculating the number of results
-
-```js
-// Before
+```javascript
+// Before - hardcoded value
 const NumResults = () => {
   return <span>X</span>;
 };
 ```
 
-The problem is that the number of results is not being dynamically calculated. It is hardcoded to `X`.
+### Solution: Lift State Up and Pass as Prop
 
-## Solution: Lift the state up to the App component and pass it down as a prop
-
-```js
-// After
+```javascript
+// After - dynamic calculation
 const NumResults = ({ movies }) => {
   return <span>{movies.length}</span>;
 };
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-
-  // ...
 
   return (
     <div>
@@ -191,12 +172,12 @@ const App = () => {
 };
 ```
 
-The solution is to lift the `movies` state up to the `App` component and pass it down as a prop to the `NumResults` component. This way, the `NumResults` component can dynamically calculate the number of results by reading the `movies` prop.
+### What is Prop Drilling?
 
-## Problem: Prop drilling
+Prop drilling is when we need to pass a prop through several nested child components to get data into a deeply nested component.
 
-```js
-// After
+```javascript
+// Prop drilling example
 const MovieList = ({ movies }) => {
   return (
     <ListBox movies={movies}>
@@ -206,62 +187,39 @@ const MovieList = ({ movies }) => {
 };
 
 const ListBox = ({ movies, children }) => {
-  return (
-    <ul>
-      {children}
-    </ul>
-  );
+  return <ul>{children}</ul>;
 };
 
 const WatchedBox = ({ movies }) => {
-  // ...
+  // movies prop drilled through multiple levels
 };
 ```
 
-We now have a problem called prop drilling. This means that we are passing the `movies` prop through multiple nested components in order to get it to the `WatchedBox` component, which is deeply nested in the component tree.
+### Why Prop Drilling is a Problem
 
-## What is prop drilling?
+| Problem | Description |
+|---------|-------------|
+| Readability | Harder to read and maintain |
+| Performance | Issues with large props passed many levels |
+| Fragility | Changes to chain can break application |
 
-Prop drilling is when we need to pass a prop through several nested child components in order to get that data into some deeply nested component.
+### How to Avoid Prop Drilling
 
-## Why is prop drilling a problem?
+| Solution | Description |
+|----------|-------------|
+| Context | Share data without passing props |
+| Component composition | Break down components to reduce drilling |
+| State management library | Centralize state (Redux, Zustand) |
 
-Prop drilling can be a problem for several reasons:
+---
 
-* It can make the code more difficult to read and maintain.
-* It can lead to performance problems, especially if the prop is large or is being passed through a lot of components.
-* It can make the code more fragile, as changes to the prop drilling chain can break the application.
+## Fixing Prop Drilling With Composition
 
-## How to avoid prop drilling
+### Problem Code
 
-There are a few ways to avoid prop drilling:
-
-* **Use context:** Context allows us to share data between components without having to pass it down as props.
-* **Use component composition:** Component composition allows us to break down complex components into smaller, more reusable components. This can help to reduce the need for prop drilling.
-* **Use a state management library:** A state management library, such as Redux, can help to centralize the state of our application and make it easier to share data between components.
-
-## Conclusion
-
-Prop drilling is a problem that can occur when we need to pass a prop through several nested components in order to get it to some deeply nested component. There are a few ways to avoid prop drilling, such as using context, component composition, or a state management library.
-
-# Fixing Prop Drilling With Composition (And Building a Layout)
-
-**Component Composition in React to Fix Prop Drilling**
-
-**Problem:**
-
-Prop drilling is when we have to pass a prop down through multiple levels of components in order to reach the component that actually needs it. This can make our code difficult to read and maintain.
-
-**Solution:**
-
-Component composition is a way to solve the prop drilling problem. It involves breaking down our UI into smaller components and passing those components to other components as props. This way, we can avoid having to pass props down through multiple levels of components.
-
-**Example:**
-
-```jsx
-// Before
+```javascript
 const App = () => {
-  const movies = []; // Get movies from API
+  const movies = [];
 
   return (
     <div>
@@ -290,19 +248,20 @@ const Main = ({ movies }) => {
 };
 ```
 
-In the above example, we have to pass the `movies` prop down to the `NumResults` component through the `NavBar` component. This is prop drilling.
+### Solution Using Component Composition
 
-**Using component composition, we can rewrite the above code as follows:**
-
-```jsx
-// After
+```javascript
 const App = () => {
-  const movies = []; // Get movies from API
+  const movies = [];
 
   return (
     <div>
-      <NavBar children={<NumResults movies={movies} />} />
-      <Main children={<ListBox movies={movies} />} />
+      <NavBar>
+        <NumResults movies={movies} />
+      </NavBar>
+      <Main>
+        <ListBox movies={movies} />
+      </Main>
     </div>
   );
 };
@@ -333,41 +292,22 @@ const ListBox = ({ movies }) => {
 };
 ```
 
-In the above code, we are now passing the `NumResults` component as a prop to the `NavBar` component. This means that we no longer have to pass the `movies` prop down to the `NumResults` component.
+### Benefits of Component Composition
 
-**Benefits of component composition:**
+| Benefit | Description |
+|---------|-------------|
+| Readability | Easier to read and maintain |
+| Reusability | Components can be reused |
+| Modularity | Components are independent |
 
-* It makes our code easier to read and maintain.
-* It makes our code more reusable.
-* It makes our code more modular.
+---
 
-**Conclusion:**
+## Using Composition to Make a Reusable Box
 
-Component composition is a powerful technique that can help us to write better React code. It can help us to avoid prop drilling, make our code more reusable, and make our code more modular.
-# Using Composition to Make a Reusable Box
+### Problem: Duplicate Code
 
-**Creating a Reusable Box Component with React Composition**
-
-**Problem:**
-
-We have two components, `WatchedBox` and `ListBox`, that are very similar. They both have the same state, class name, and button. The only difference is that they render different children conditionally.
-
-**Solution:**
-
-We can create a reusable `Box` component that both `WatchedBox` and `ListBox` can use. This will allow us to avoid repeating the same code and make our application more modular.
-
-**Steps:**
-
-1. Create a new component called `Box`.
-2. Move the state, class name, and button logic from the `WatchedBox` and `ListBox` components to the `Box` component.
-3. Add a `children` prop to the `Box` component. This will allow us to pass in the different content that we want to render inside the box.
-4. Update the `WatchedBox` and `ListBox` components to use the `Box` component. Simply pass in the content that you want to render as the `children` prop.
-
-**Example:**
-
-```jsx
-// Before
-
+```javascript
+// Before - duplicate code in both components
 const WatchedBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -391,9 +331,10 @@ const ListBox = () => {
 };
 ```
 
-```jsx
-// After
+### Solution: Reusable Box Component
 
+```javascript
+// After - reusable Box component
 const Box = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -414,39 +355,22 @@ const ListBox = () => {
 };
 ```
 
-**Benefits:**
+### Benefits
 
-* Reduced code duplication
-* Increased modularity
-* More reusable code
+| Benefit | Description |
+|---------|-------------|
+| Reduced duplication | Write once, use everywhere |
+| Increased modularity | Each component has single responsibility |
+| More reusable | Box can be used for any content |
 
-**Conclusion:**
+---
 
-Component composition is a powerful technique that can be used to create reusable components, solve prop drilling, and build better layouts. By using component composition, we can write more efficient and maintainable code.
+## Passing Elements as Props (Alternative to children)
 
-#  Passing Elements as Props (Alternative to children)
+### Using Explicit Props
 
-**Using an Explicit Prop Instead of the Children Prop for Component Composition**
-
-**Problem:**
-
-We want to use component composition to build our React application, but we want to avoid using the `children` prop.
-
-**Solution:**
-
-We can use an explicit prop instead of the `children` prop for component composition. This means that we will explicitly define the prop and pass in the component that we want to render as the value of the prop.
-
-**Steps:**
-
-1. Define an explicit prop in the parent component.
-2. Pass the component that you want to render as the value of the prop.
-3. In the child component, accept the prop and render it.
-
-**Example:**
-
-```jsx
+```javascript
 // Parent component
-
 const ParentComponent = () => {
   const [element, setElement] = useState(<MovieList />);
 
@@ -458,7 +382,6 @@ const ParentComponent = () => {
 };
 
 // Child component
-
 const Box = ({ element }) => {
   return (
     <div className="box">
@@ -468,37 +391,24 @@ const Box = ({ element }) => {
 };
 ```
 
-**Benefits:**
+### children vs Explicit Props
 
-* Can be used to pass in multiple elements with separate names
-* Can be used to avoid the implicit nature of the `children` prop
+| Approach | When to Use |
+|----------|-------------|
+| children | Single element, implicit, preferred way |
+| Explicit props | Multiple elements, separate names needed |
 
-**Conclusion:**
+---
 
-Using an explicit prop instead of the `children` prop for component composition is a viable option, but it is not the preferred way to do things in React. The `children` prop is a special prop that is designed for component composition, and it is the preferred way to pass components to other components.
+## Handling Hover Events
 
-# Handling Hover Events
+### Problem
 
-**Handling Hover Events to Display Temporary Rating**
+Display a temporary rating whenever a user hovers over stars.
 
-**Problem:**
+### Solution
 
-We want to display a temporary rating whenever a user hovers over the stars.
-
-**Solution:**
-
-We can use the `onMouseEnter` and `onMouseLeave` events to handle hover events. We will also need to create a new state variable to store the temporary rating.
-
-**Steps:**
-
-1. Create a new state variable to store the temporary rating.
-2. Add `onMouseEnter` and `onMouseLeave` event handlers to the star component.
-3. Update the state variable in the event handlers.
-4. Display the temporary rating in the UI.
-
-**Example:**
-
-```jsx
+```javascript
 // State
 const [rating, setRating] = useState(0);
 const [tempRating, setTempRating] = useState(0);
@@ -520,50 +430,41 @@ return (
       onHoverIn={onHoverIn}
       onHoverOut={onHoverOut}
     />
-
     <div>{tempRating}</div>
   </div>
 );
 ```
 
-**Conclusion:**
+### Key Event Handlers
 
-By handling hover events and using a state variable to store the temporary rating, we can easily display a temporary rating whenever a user hovers over the stars.
-# Props as a Component API
-**Thinking About Props for Reusable Components**
+| Event | Description |
+|-------|-------------|
+| onMouseEnter | Triggers when mouse enters element |
+| onMouseLeave | Triggers when mouse leaves element |
 
-**Problem:**
+---
 
-When building reusable components, it is important to carefully consider the props that the component needs. The props should be the public API of the component, and should allow consumers to interact with the component without exposing too much complexity.
+## Props as a Component API
 
-**Solution:**
+### Thinking About Props
 
-To strike the right balance between too few and too many props, consider the following:
+Props are the public API of a component. They should allow consumers to interact with the component without exposing too much complexity.
 
-* What functionality does the component need to provide?
-* What configuration options do consumers need?
-* How complex is the component's internal logic?
+### Design Questions
 
-If the component is simple, a few well-chosen props may be sufficient. If the component is more complex, consider providing default values for many of the props to make it easier for consumers to use.
+| Question | Purpose |
+|----------|---------|
+| What functionality does the component need? | Define component purpose |
+| What configuration options do consumers need? | Identify necessary props |
+| How complex is internal logic? | Determine prop complexity |
 
-**Steps:**
+### Simple Component Example
 
-**1. Identify the component's functionality.** What does the component do? What data does it need to operate? What actions can it perform?
-
-**2. Consider the needs of consumers.** What configuration options do consumers need? What information will they need to provide to the component? What should the component's public interface look like?
-
-**3. Strike a balance between flexibility and simplicity.** Avoid exposing too much complexity to consumers, but make sure that the component is flexible enough to meet their needs.
-
-**Example:**
-
-```jsx
-// Simple weather component with one prop: location
-
+```javascript
+// Simple weather component with one prop
 function Weather({ location }) {
-  // Fetch the weather data for the given location
   const weatherData = fetchWeatherData(location);
 
-  // Display the weather data
   return (
     <div>
       <h1>Weather for {location}</h1>
@@ -573,9 +474,10 @@ function Weather({ location }) {
 }
 ```
 
-```jsx
-// More complex weather component with multiple props
+### Complex Component Example
 
+```javascript
+// More complex weather component with multiple props
 function Weather({
   location,
   days,
@@ -583,10 +485,8 @@ function Weather({
   temperatureUnit,
   dataToDisplay,
 }) {
-  // Fetch the weather data for the given location, days, and hourly option
   const weatherData = fetchWeatherData(location, days, hourly);
 
-  // Display the weather data according to the temperatureUnit and dataToDisplay props
   return (
     <div>
       <h1>Weather for {location}</h1>
@@ -601,40 +501,30 @@ function Weather({
 }
 ```
 
-**Conclusion:**
+### Balancing Props
 
-By carefully considering the component's functionality, the needs of consumers, and the balance between flexibility and simplicity, you can design props that make your reusable components easy to use and maintain.
+| Too Few Props | Too Many Props |
+|---------------|----------------|
+| Not flexible enough | Overwhelming for consumers |
+| Limited use cases | Hard to maintain |
+| May not meet needs | Complex API |
 
-# Improving Reusability With Props
+---
 
-**Making the Rating Component More Flexible and Reusable**
+## Improving Reusability With Props
 
-**Problem:**
+### Making Components Flexible
 
-The rating component is currently not very flexible or reusable. It does not allow consumers to specify the colors, sizes, or font style of the stars or text. It also does not allow consumers to display a message instead of the rating number, or to set a default rating.
+Add props to allow consumers to specify:
+- Colors
+- Sizes
+- Font style
+- Message array
+- Default rating
 
-**Solution:**
+### Example: Reusable Rating Component
 
-We can make the rating component more flexible and reusable by adding props that allow consumers to specify the following:
-
-* Colors
-* Sizes
-* Font style
-* Message array
-* Default rating
-
-**Steps:**
-
-1. Add props for colors, sizes, and font style.
-2. Update the component to use the prop values instead of the default values.
-3. Add a prop for a message array.
-4. Update the component to display the message array instead of the rating number if the message array is provided.
-5. Add a prop for a default rating.
-6. Update the component to initialize the rating state with the default rating prop if it is provided.
-
-**Example:**
-
-```jsx
+```javascript
 const Rating = ({
   rating,
   color,
@@ -650,7 +540,6 @@ const Rating = ({
 
   const renderStars = () => {
     const stars = [];
-
     for (let i = 0; i < rating; i++) {
       stars.push(
         <Star
@@ -661,7 +550,6 @@ const Rating = ({
         />
       );
     }
-
     return stars;
   };
 
@@ -676,55 +564,29 @@ const Rating = ({
 };
 ```
 
-**Usage:**
+### Usage Example
 
-```jsx
+```javascript
 <Rating
   rating={3}
   color="red"
   size="48"
-  messages={[
-    "Terrible",
-    "Bad",
-    "Okay",
-    "Good",
-    "Amazing",
-  ]}
+  messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
   defaultRating={2}
 />
 ```
 
-This will render a rating component with red stars that are 48 pixels in size. The component will also display the message "Good" because the rating is 3 and the messages array has 5 elements.
+---
 
-**Conclusion:**
+## PropTypes
 
-By adding props to the rating component, we have made it more flexible and reusable. Consumers can now specify the colors, sizes, font style, message array, and default rating of the component. This makes it easier for consumers to use the component in their own applications.
+### Adding Type Checking
 
-# PropTypes
+Import and use PropTypes to validate component props.
 
-**Adding Type Checking to the Rating Component Using Proptypes**
-
-**Problem:**
-
-The rating component does not currently have type checking enabled for its props. This means that consumers of the component can pass in any type of data for the props, even if it is not the type that the component expects. This can lead to bugs and unexpected behavior.
-
-**Solution:**
-
-We can add type checking to the rating component using the `proptypes` package. This package provides a number of validators that we can use to check the type of each prop.
-
-**Steps:**
-
-1. Import the `proptypes` package.
-2. Add a `proptypes` property to the rating component.
-3. For each prop, specify the expected type using a proptypes validator.
-
-**Example:**
-
-```jsx
-// Import the proptypes package.
+```javascript
 import PropTypes from 'prop-types';
 
-// Add type checking to the rating component.
 const Rating = ({
   rating,
   color,
@@ -733,9 +595,9 @@ const Rating = ({
   defaultRating,
   onSetRating,
 }) => {
-  ...
+  // Component logic here
 
-  // proptypes
+  // PropTypes definition
   Rating.propTypes = {
     rating: PropTypes.number.isRequired,
     color: PropTypes.string,
@@ -747,21 +609,31 @@ const Rating = ({
 };
 ```
 
-**Benefits:**
+### Common PropTypes Validators
 
-Adding type checking to the rating component has a number of benefits:
+| Validator | Description |
+|-----------|-------------|
+| PropTypes.string | String value |
+| PropTypes.number | Number value |
+| PropTypes.bool | Boolean value |
+| PropTypes.array | Array value |
+| PropTypes.object | Object value |
+| PropTypes.func | Function value |
+| PropTypes.node | Renderable value |
+| PropTypes.element | React element |
+| .isRequired | Marks prop as required |
 
-* It helps to prevent bugs and unexpected behavior.
-* It makes the component more reliable and easier to use for consumers.
-* It documents the expected types of each prop, which makes the code more readable and maintainable.
+### Benefits of PropTypes
 
-**Notes:**
+| Benefit | Description |
+|---------|-------------|
+| Prevents bugs | Catches type mismatches |
+| Documents API | Shows expected prop types |
+| Better DX | Warning in console for invalid props |
 
-* Proptypes is a built-in React package, but it is not required.
-* If you are using TypeScript, you can use TypeScript's type system to type check your component's props instead of proptypes.
-* It is generally not recommended to mark props as required unless they are absolutely necessary. Instead, it is better to provide default values for all props.
+### Notes on PropTypes
 
-**Conclusion:**
-
-Adding type checking to the rating component is a simple and effective way to improve the quality and reliability of the code.
-
+- PropTypes is a built-in React package
+- Not required if using TypeScript
+- Avoid marking props as required unless absolutely necessary
+- Provide default values when possible
